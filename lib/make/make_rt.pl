@@ -60,6 +60,7 @@
 :- use_module(library(terms),     [atom_concat/2]).
 :- use_module(library(system),    [file_exists/1]).
 :- use_module(library(lists),     [append/3]).
+:- use_module(library(hiordlib), [maplist/2]).
 
 :- use_module(library(messages)).
 
@@ -185,7 +186,7 @@ show_target_comment(Target) :-
 make(A) :-
 	dependency_list(A, R, [], Faileds, R, []),
 	show_dependency_list(R, A),
-	catch(list(R, make_dep),
+	catch(maplist(make_dep, R),
 	    make_error(Message, Args),
 	    rethrow_make_error(Faileds, Message, Args)).
 
