@@ -25,7 +25,7 @@
 :- doc(subtitle, "A portable make with all the power of Prolog inside").
 
 :- doc(author, "Manuel Hermenegildo").
-:- doc(author, "The CLIP Group").
+:- doc(author, "The Ciao Development Team").
 :- doc(address, "@tt{clip@@dia.fi.upm.es}").
 :- doc(address, "@tt{http://www.clip.dia.fi.upm.es/}").
 :- doc(address, "Facultad de Inform@'{a}tica").
