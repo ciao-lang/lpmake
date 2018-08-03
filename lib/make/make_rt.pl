@@ -38,9 +38,6 @@
 :- doc(author, "Manuel Hermenegildo").
 :- doc(author, "Edison Mera").
 
-:- doc(usage, "This module is loaded automatically when the
-   @lib{make} library package is used.").
-
 :- doc(module, "This is the run-time module which implements the
    predicates which are provided when using the @lib{make} library
    package in a given application. For example, they are used
