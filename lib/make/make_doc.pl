@@ -200,7 +200,7 @@ directory as the configuration file. For example:
 
 vpath := '/home/clip/Systems/ciao/lib'.
 vpath := '/home/clip/Systems/ciao/library'.
-vpath := '/home/clip/Systems/lpdoc/lib'.
+vpath := '/home/clip/Systems/lpdoc/etc'.
 @end{verbatim}
 
 @subsection{Documenting Rules}
