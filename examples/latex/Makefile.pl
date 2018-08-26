@@ -1,5 +1,6 @@
 :- module(_,_,[make, fsyntax]).
 
+:- use_module(engine(io_basic)).
 :- use_module(library(system)).
 :- use_module(library(source_tree), [delete_glob/2]).
 :- use_module(library(terms), [atom_concat/2]).

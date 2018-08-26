@@ -14,7 +14,7 @@
 
 %% Ciao libraries
 :- use_module(library(errhandle), [handle_error/2]).
-:- use_module(library(lists),     [append/3]).
+:- use_module(library(lists),     [member/2, append/3]).
 :- use_module(library(system),    [file_exists/1]).
 :- use_module(library(messages),  [error_message/2]).
 %% *** Will be loaded INTO library also

@@ -230,6 +230,8 @@ foo}) in comments helps this dual purpose.  For example, the
 following rule:
 
 @begin{verbatim}
+:- use_module(engine(io_basic), [display/1]).
+
 target_comment(realclean) :- 
         display('Cleanup of all generated files.').
 @end{verbatim}
@@ -243,6 +245,7 @@ Same as the previous rule, but for suffix rules. See, for example, the
 following generic rule:
 
 @begin{verbatim}
+:- use_module(engine(io_basic), [display/1]).
 :- use_module(library(terms), [atom_concat/2]).
 
 dependency_comment(SSuffix,TSuffix,FileBase) :- 

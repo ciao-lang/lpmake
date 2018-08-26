@@ -56,6 +56,7 @@
 :- use_module(library(pathnames), [path_splitext/3, path_concat/3, path_basename/2]).
 :- use_module(library(terms),     [atom_concat/2]).
 :- use_module(library(system),    [file_exists/1]).
+:- use_module(engine(stream_basic), [sourcename/1]).
 :- use_module(library(lists),     [append/3]).
 :- use_module(library(hiordlib), [maplist/2]).
 
@@ -486,9 +487,12 @@ trace_message(Mess, Args) :-
 
 :- pop_prolog_flag(multi_arity_warnings).
 
+:- use_module(engine(hiord_rt), [call/1]).
 :- use_module(library(aggregates)).
 
 % :- meta_predicate call_unknown(goal).
+
+:- use_module(engine(prolog_flags), [prolog_flag/3]).
 
 call_unknown(G) :-
 	prolog_flag(unknown, Old,  fail),

@@ -1,5 +1,6 @@
 :- module(_,_,[make,fsyntax]).
 
+:- use_module(engine(io_basic)).
 :- use_module(library(system)).
 :- use_module(library(stream_utils), [file_to_string/2, string_to_file/2]).
 :- use_module(library(lists), [append/3]).
