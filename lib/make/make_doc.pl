@@ -59,9 +59,11 @@ or
 
 @end{itemize}
 
-@noindent @bf{Note}: It is often useful to use the @lib{fsyntax}
+@begin{note}
+@bf{Note}: It is often useful to use the @lib{fsyntax}
 package inside a @file{Makefile} (or when when using the @lib{make}
 library in other applications).
+@end{note}
 
 ").
 

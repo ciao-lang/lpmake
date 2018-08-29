@@ -37,6 +37,8 @@ Copyright @copyright{} 1997-2002 The Clip Group.
 @include{DocCopyright.lpdoc}
 ").
 
+:- doc(stability, devel).
+
 :- doc(summary, "@apl{lpmake} is a small Ciao application which
    uses the Ciao @lib{make} library to implement dependency-driven
    scripts in a similar way to the Unix @apl{make}
@@ -61,9 +63,6 @@ Copyright @copyright{} 1997-2002 The Clip Group.
 :- doc(module, "
 
    @cindex{make} @cindex{lpmake} 
-
-   @bf{Note}: @apl{lpmake} and the @lib{make} library are still under
-   development, and they may change in future releases.
 
    @apl{lpmake} is a Ciao application which uses the Ciao @lib{make}
    library to implement a dependency-driven scripts in a similar way
