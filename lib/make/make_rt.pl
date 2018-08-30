@@ -492,7 +492,7 @@ trace_message(Mess, Args) :-
 
 % :- meta_predicate call_unknown(goal).
 
-:- use_module(engine(prolog_flags), [prolog_flag/3]).
+:- use_module(engine(runtime_control), [prolog_flag/3]).
 
 call_unknown(G) :-
 	prolog_flag(unknown, Old,  fail),
