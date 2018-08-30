@@ -8,11 +8,10 @@
 
 %% :- use_package(trace).
 
-%% ISO Prolog-like modules
 :- use_module(library(format),     [format/3]).
+:- use_module(engine(data_facts)).
 :- use_module(library(aggregates), [findall/3]).
 
-%% Ciao libraries
 :- use_module(library(errhandle), [handle_error/2]).
 :- use_module(library(lists),     [member/2, append/3]).
 :- use_module(library(system),    [file_exists/1]).

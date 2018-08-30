@@ -2,6 +2,7 @@
 
 :- include(library(make/make_ops)).
 
+:- use_module(engine(data_facts)).
 :- use_module(library(terms_vars)).
 :- use_module(library(messages), [error_message/2]).
 

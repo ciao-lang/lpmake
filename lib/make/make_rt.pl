@@ -52,6 +52,7 @@
 
 %% ---------------------------------------------------------------------------
 
+:- use_module(engine(data_facts)).
 :- use_module(library(compiler), [use_module/1, unload/1]).
 :- use_module(library(pathnames), [path_splitext/3, path_concat/3, path_basename/2]).
 :- use_module(library(terms),     [atom_concat/2]).
