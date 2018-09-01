@@ -1,4 +1,4 @@
-:- module(lpmake, [main/1], [make, assertions, regexp]).
+:- module(lpmake, [main/1], [make, assertions, regexp, datafacts]).
 
 :- use_module(library(terms),    [atom_concat/2]).
 :- use_module(library(libpaths), [get_alias_path/0]).
@@ -9,7 +9,6 @@
 %% :- use_package(trace).
 
 :- use_module(library(format),     [format/3]).
-:- use_module(engine(data_facts)).
 :- use_module(library(aggregates), [findall/3]).
 
 :- use_module(library(errhandle), [handle_error/2]).

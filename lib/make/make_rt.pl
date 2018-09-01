@@ -27,7 +27,7 @@
 		get_active_config/1,
 		dyn_load_cfg_module_into_make/1,
 		get_settings_nvalue/1],
-	    [assertions, regtypes, hiord]).
+	    [assertions, regtypes, hiord, datafacts]).
 
 :- include(library(make/make_com)).
 
@@ -52,7 +52,6 @@
 
 %% ---------------------------------------------------------------------------
 
-:- use_module(engine(data_facts)).
 :- use_module(library(compiler), [use_module/1, unload/1]).
 :- use_module(library(pathnames), [path_splitext/3, path_concat/3, path_basename/2]).
 :- use_module(library(terms),     [atom_concat/2]).
@@ -81,22 +80,22 @@ register_module(A) :- dyn_load_cfg_module_into_make(A). % TODO: not used?
 unregister_module(A) :- unload(A). % TODO: not used?
 
 add_name_value(Name, Value) :-
-	data_facts:assertz_fact(name_value(Name, Value)).
+	assertz_fact(name_value(Name, Value)).
 
 del_name_value(Name) :-
-	data_facts:retractall_fact(name_value(Name, _)).
+	retractall_fact(name_value(Name, _)).
 
 set_name_value(Name, Value) :-
-	data_facts:retractall_fact(name_value(Name, _)),
-	data_facts:asserta_fact(name_value(Name, Value)).
+	retractall_fact(name_value(Name, _)),
+	asserta_fact(name_value(Name, Value)).
 
 % Push ActiveConfig on the active_config/1 stack
 push_active_config(ActiveConfig) :-
-	data_facts:asserta_fact(active_config(ActiveConfig)).
+	asserta_fact(active_config(ActiveConfig)).
 
 % Remove the top of the active_config/1 stack
 pop_active_config :-
-	data_facts:retract_fact(active_config(_)),
+	retract_fact(active_config(_)),
 	!.
 
 % Get the top of the active_config/1 stack
@@ -114,13 +113,13 @@ get_active_config(ActiveConfig) :-
 
 push_name_value(Name, Var, R) :-
 	findall(L, get_value(Var, L), Values),
-	data_facts:retractall_fact(name_value(Name, _)),
+	retractall_fact(name_value(Name, _)),
 	push_name_value__(Values, Name, R).
 
 
 push_name_value__([],     _,    []).
 push_name_value__([A|As], Name, [RA|RAs]) :-
-	data_facts:assertz_fact(name_value(Name, A), RA),
+	assertz_fact(name_value(Name, A), RA),
 	push_name_value__(As, Name, RAs).
 
 
@@ -141,10 +140,10 @@ pop_name_value([R|Rs]) :-
 # "Copy the variable values from @var{Source} to @var{Target}".
 
 cp_name_value(Source, Target) :-
-	data_facts:retractall_fact(name_value(Target, _)),
+	retractall_fact(name_value(Target, _)),
 	(
 	    get_value(Source, Value),
-	    data_facts:assertz_fact(name_value(Target, Value)),
+	    assertz_fact(name_value(Target, Value)),
 	    fail
 	;
 	    true
@@ -152,9 +151,9 @@ cp_name_value(Source, Target) :-
 
 add_vpath(Path) :-
 	path_concat(Path, '', DirPath),
-	( data_facts:current_fact(vpath(DirPath)) ->
+	( current_fact(vpath(DirPath)) ->
 	    true
-	; data_facts:assertz_fact(vpath(DirPath))
+	; assertz_fact(vpath(DirPath))
 	).
 
 :- regtype target(T) # "@var{T} is a Makefile target.".
