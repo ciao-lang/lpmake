@@ -33,7 +33,7 @@
 
 %% ---------------------------------------------------------------------------
 
-:- doc(title, "Predicates Available When Using The Make Package").
+:- doc(title, "Predicates available when using the make package").
 
 :- doc(author, "Manuel Hermenegildo").
 :- doc(author, "Edison Mera").
