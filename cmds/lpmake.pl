@@ -32,7 +32,7 @@
 :- doc(copyright, "
 Copyright @copyright{} 1997-2002 The Clip Group.
 
-@include{DocCopyright.lpdoc}
+@include{FreeDocLicense.lpdoc}
 ").
 
 :- doc(stability, devel).

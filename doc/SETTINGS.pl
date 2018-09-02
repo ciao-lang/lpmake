@@ -1,6 +1,6 @@
 :- module(_, [], [doccfg]).
 
-:- include(ciao_docsrc(common/'LPDOCCOMMON')).
+:- include(core_docsrc(common/'LPDOCCOMMON')).
 
 filepath := at_bundle(lpmake, 'cmds').
 filepath := at_bundle(lpmake, '.'). % (for examples/)

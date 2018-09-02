@@ -8,11 +8,11 @@
 
 :- doc(author, "Manuel Hermenegildo").
 
-%% :- include(ciao_docsrc(common/'ClipAddress')).
+%% :- include(core_docsrc(common/'ClipAddress')).
 
 :- doc(copyright, "Copyright @copyright{} Manuel Hermenegildo
 
-@include{DocCopyright.lpdoc}
+@include{FreeDocLicense.lpdoc}
 
 ").
 
