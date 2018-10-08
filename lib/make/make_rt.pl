@@ -62,9 +62,7 @@
 
 :- use_module(library(messages)).
 
-:- push_prolog_flag(unused_pred_warnings, no).
 :- use_module(library(format), [format_control/1]).
-:- pop_prolog_flag(unused_pred_warnings).
 
 :- use_module(library(lists), [list_concat/2]).
 :- reexport(library(compiler/up_to_date)).
