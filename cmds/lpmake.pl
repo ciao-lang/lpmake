@@ -11,7 +11,7 @@
 :- use_module(library(format),     [format/3]).
 :- use_module(library(aggregates), [findall/3]).
 
-:- use_module(library(errhandle), [handle_error/3]).
+:- use_module(library(errhandle), [handle_error/2]).
 :- use_module(library(lists),     [member/2, append/3]).
 :- use_module(library(system),    [file_exists/1]).
 :- use_module(library(messages),  [error_message/2]).
@@ -194,7 +194,7 @@ handle_make_error(make_error(Format, Args)) :-
 	error_message(Format, Args),
 	fail.
 handle_make_error(error(Error, Where)) :-
-	handle_error(Error, Where, fail). % TODO: fail or abort?
+	handle_error(Error, Where).
 
 is_help_option(H) :-
 	member(H, ['-h', '-help', '--help']).
