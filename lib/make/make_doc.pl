@@ -97,8 +97,8 @@ following rule:
 :- use_module(library(terms), [atom_concat/2]).
 
 dvi <= tex :: FileRoot :-
-        atom_concat(['latex ',FileRoot,'.tex'],Command),
-        system(Command).
+    atom_concat(['latex ',FileRoot,'.tex'],Command),
+    system(Command).
 @end{verbatim}
 
 states that we can generate a file @em{File}@tt{.dvi} if we have a
@@ -132,7 +132,7 @@ issued, deletes temporary files in the LaTeX application:
 :- use_module(library(source_tree), [delete_glob/2]).
 
 clean <- :-
-        delete_glob('.', '*.aux|*.log|*~').
+    delete_glob('.', '*.aux|*.log|*~').
 @end{verbatim}
 
 @item{@tt{@em{Target} <- @em{Deps} :- @em{BodyLiterals}.}}
@@ -153,7 +153,7 @@ executed first:
 :- use_module(library(source_tree), [delete_glob/2]).
 
 realclean <- clean :-
-        delete_glob('.', '*.dvi|*.ps').
+    delete_glob('.', '*.dvi|*.ps').
 
 @end{verbatim}
 
@@ -174,7 +174,7 @@ the fact @tt{main(paper).}  --see the @lib{fsyntax} library):
 main := paper.
 
 view <- ~atom_concat([~main,'.ps']) :-
-        system(~atom_concat(['ghostview ',~main,'.ps'])).
+    system(~atom_concat(['ghostview ',~main,'.ps'])).
 @end{verbatim}
 
 @end{description}
@@ -236,7 +236,7 @@ following rule:
 :- use_module(engine(io_basic), [display/1]).
 
 target_comment(realclean) :- 
-        display('Cleanup of all generated files.').
+    display('Cleanup of all generated files.').
 @end{verbatim}
 
 will produce output in the two cases pointed out above.
@@ -252,8 +252,8 @@ following generic rule:
 :- use_module(library(terms), [atom_concat/2]).
 
 dependency_comment(SSuffix,TSuffix,FileBase) :- 
-        display(~atom_concat(['Generation of ',FileBase,'.',
-	        TSuffix, ' from ',FileBase,'.',SSuffix])).
+    display(~atom_concat(['Generation of ',FileBase,'.',
+            TSuffix, ' from ',FileBase,'.',SSuffix])).
 @end{verbatim}
 
 @end{description}

@@ -12,7 +12,7 @@
 %% A simple target. Defines how to produce file 'hw'.
 
 hw <-  []    :-
- 	string_to_file("Hello world", hw).
+    string_to_file("Hello world", hw).
 
 %% A comment describing this target (see below):
 comment(hw,['Generation of file hw']).
@@ -21,9 +21,9 @@ comment(hw,['Generation of file hw']).
 %% A target with a dependency. 'hwhw' requires 'hw'.
 
 hwhw <- [hw] :-
-	file_to_string(hw,Content),
-	append(Content,[0'\n|Content],DoubleContent),
-	string_to_file(DoubleContent,hwhw).
+    file_to_string(hw,Content),
+    append(Content,[0'\n|Content],DoubleContent),
+    string_to_file(DoubleContent,hwhw).
 
 comment(hwhw,['Generation of file hwhw']).
 
@@ -31,7 +31,7 @@ comment(hwhw,['Generation of file hwhw']).
 %% A simple target. Defines how to produce file 'datafile.simple'.
 
 'datafile.simple' <-  :-
-	string_to_file("Hello world", 'datafile.simple').
+    string_to_file("Hello world", 'datafile.simple').
 
 comment('datafile.simple',['Generation of file datafile.simple']).
 
@@ -40,9 +40,9 @@ comment('datafile.simple',['Generation of file datafile.simple']).
 %% <file>.double is generated always from <file>.simple
 
 double <= simple :: Name :-
-	file_to_string(~atom_concat([Name,'.simple']),Content),
-	append(Content,[0'\n|Content],DoubleContent),
-	string_to_file(DoubleContent,~atom_concat([Name,'.double'])).
+    file_to_string(~atom_concat([Name,'.simple']),Content),
+    append(Content,[0'\n|Content],DoubleContent),
+    string_to_file(DoubleContent,~atom_concat([Name,'.double'])).
 
 %% -------------------------------------------------------------------------
 %% A dependency based on suffixes with a precondition.
@@ -50,7 +50,7 @@ double <= simple :: Name :-
 %% precond is done
 
 boo <- :-
-	display((double <= simple :: name <- precond :- body1, body2)).
+    display((double <= simple :: name <- precond :- body1, body2)).
 
 %% -------------------------------------------------------------------------
 %% Example using library predicates
@@ -58,10 +58,10 @@ boo <- :-
 :- use_module(library(source_tree), [delete_glob/2]).
 
 clean <- [] # "Cleanup of temporary files " :-
-	delete_glob('.', '*~|*.asr|*.itf|*.po').
+    delete_glob('.', '*~|*.asr|*.itf|*.po').
 
 realclean <- clean :-
-	delete_glob('.', 'hw|hwhw|*simple|*double').
+    delete_glob('.', 'hw|hwhw|*simple|*double').
 
 comment(realclean,['Cleanup of all generated files']).
 
@@ -77,12 +77,12 @@ comment(realclean,['Cleanup of all generated files']).
 :- push_prolog_flag(multi_arity_warnings,off).
 %% Make calls target_comment/1 for simple targets:
 target_comment(Target) :- 
-	comment(Target,Comment),
-	display(~atom_concat([~atom_concat(Comment), '\n'])).
+    comment(Target,Comment),
+    display(~atom_concat([~atom_concat(Comment), '\n'])).
 :- pop_prolog_flag(multi_arity_warnings).
 
 %% Similarly, make calls dependency_comment/3 for dependencies (only 
 %% during execution, not when documenting -h).
 dependency_comment(SSuffix,TSuffix,FileBase) :- 
-	display(~atom_concat(['Generation of ',FileBase,TSuffix,
-                              ' from ',FileBase,SSuffix,'\nl'])).
+    display(~atom_concat(['Generation of ',FileBase,TSuffix,
+                          ' from ',FileBase,SSuffix,'\nl'])).

@@ -21,11 +21,11 @@
 
 :- use_module(library(make/make_rt)).
 %               [make/1,trace_message/2,make_option/1,
-% 	       call_unknown/1,
-% 	       all_values/2,
-% 	       dot_concat/2,
-% 	       get_value/2,
-% 	       get_value_def/3,
-% 	       check_var_exists/1,
-% 	       find_file/2,
-% 	       dyn_load_cfg_module_into_make/1]).
+%              call_unknown/1,
+%              all_values/2,
+%              dot_concat/2,
+%              get_value/2,
+%              get_value_def/3,
+%              check_var_exists/1,
+%              find_file/2,
+%              dyn_load_cfg_module_into_make/1]).

@@ -163,11 +163,11 @@ Copyright @copyright{} 1997-2002 The Clip Group.
 % Note: This main/0 could not be necessary, but is present for compatibility
 
 % main :-
-% 	prolog_flag(argv, Args, _),
-% 	make_toplevel(Args, lpmake).
+%       prolog_flag(argv, Args, _),
+%       make_toplevel(Args, lpmake).
 
 main(Args) :-
-	make_toplevel(Args, lpmake).
+    make_toplevel(Args, lpmake).
 
 :- pop_prolog_flag(multi_arity_warnings).
 
@@ -176,100 +176,100 @@ main(Args) :-
 %% ---------------------------------------------------------------------------
 
 make_toplevel(Args, ApplName) :-
-	get_alias_path,
-	catch(parse_args(Args, ApplName, options(false, C, C)), E,
-	    handle_make_error(E)),
-	!.
+    get_alias_path,
+    catch(parse_args(Args, ApplName, options(false, C, C)), E,
+        handle_make_error(E)),
+    !.
 % make_toplevel(_, _) :-
-% 	halt(1).
+%       halt(1).
 
 handle_make_error(make_args_error(Format, Args, ApplName)) :- !,
-	append("~nERROR: ", Format, T1),
-	append(T1,          "~n~n", T2),
-	format(user_error, T2, Args),
-	report_usage(ApplName),
-	report_commands(''),
-	fail. % TODO: fail or abort?
+    append("~nERROR: ", Format, T1),
+    append(T1,          "~n~n", T2),
+    format(user_error, T2, Args),
+    report_usage(ApplName),
+    report_commands(''),
+    fail. % TODO: fail or abort?
 handle_make_error(make_error(Format, Args)) :- !,
-	error_message(Format, Args),
-	fail. % TODO: fail or abort?
+    error_message(Format, Args),
+    fail. % TODO: fail or abort?
 handle_make_error(E) :-
-	default_error_message(E),
-	fail. % TODO: fail or abort?
+    default_error_message(E),
+    fail. % TODO: fail or abort?
 
 is_help_option(H) :-
-	member(H, ['-h', '-help', '--help']).
+    member(H, ['-h', '-help', '--help']).
 
 parse_args([H|Args], ApplName, options(_, C, T)) :-
-	is_help_option(H),
-	!,
-	parse_args(Args, ApplName, options(true, C, T)).
+    is_help_option(H),
+    !,
+    parse_args(Args, ApplName, options(true, C, T)).
 parse_args(['--trace-deps'|Args], ApplName, Options) :-
-	asserta_fact(make_option('--trace-deps')),
-	!,
-	parse_args(Args, ApplName, Options).
+    asserta_fact(make_option('--trace-deps')),
+    !,
+    parse_args(Args, ApplName, Options).
 parse_args(['-d', NameValue|Args], ApplName, Options) :-
-	parse_name_value(NameValue, Name, Value),
-	add_name_value(Name, Value),
-	!,
-	parse_args(Args, ApplName, Options).
+    parse_name_value(NameValue, Name, Value),
+    add_name_value(Name, Value),
+    !,
+    parse_args(Args, ApplName, Options).
 parse_args([Type, File0|Args], ApplName, options(H, C, [FFile|ConfigFile])) :-
-	read_from_atom_atmvars(File0, File),
-	( Type='-m', FFile = File ; Type='-l', FFile = library(File) ),
-	!,
-	parse_args(Args, ApplName, options(H, C, ConfigFile)).
+    read_from_atom_atmvars(File0, File),
+    ( Type='-m', FFile = File ; Type='-l', FFile = library(File) ),
+    !,
+    parse_args(Args, ApplName, options(H, C, ConfigFile)).
 parse_args(Args, ApplName, Options) :-
-	parse_other_options(Args, ApplName, Options),
-	!.
+    parse_other_options(Args, ApplName, Options),
+    !.
 parse_args(Args, ApplName, _Options) :-
-	throw(make_args_error("~n~w: Unrecognized Option -- ~w~nTry: " ||
-		"`~w --help' for more information~n",
-		[ApplName, Args, ApplName], ApplName)).
+    throw(make_args_error("~n~w: Unrecognized Option -- ~w~nTry: " ||
+            "`~w --help' for more information~n",
+            [ApplName, Args, ApplName], ApplName)).
 
 parse_other_options(Args, ApplName, options(H, ConfigFiles, [])) :-
-	( ConfigFiles == [] ->
-	    default_config_file(A),
-	    load_config_files(A, "(default) module")
-	;
-	    load_config_files(ConfigFiles, "module")
-	),
-	( H == true ->
-	    report_usage(ApplName),
-	    report_commands(ConfigFiles)
-	;
-	    process_targets(Args)
-	).
+    ( ConfigFiles == [] ->
+        default_config_file(A),
+        load_config_files(A, "(default) module")
+    ;
+        load_config_files(ConfigFiles, "module")
+    ),
+    ( H == true ->
+        report_usage(ApplName),
+        report_commands(ConfigFiles)
+    ;
+        process_targets(Args)
+    ).
 
 default_config_file(['Makefile.pl']).
 default_config_file(['makefile.pl']).
 
 load_config_files([],     _).
 load_config_files([M|Ms], Message) :-
-	load_config_file(Message, M),
-	load_config_files(Ms, Message).
+    load_config_file(Message, M),
+    load_config_files(Ms, Message).
 
 % group:name=value
 % group_name_value(NameValue, Name, Value) :-
-% 	atom_concat([Name, '=', Value], GroupNameValue).
+%       atom_concat([Name, '=', Value], GroupNameValue).
 
 % parse_other_args_and_load([Type,ConfigFile|Targets],Type,ConfigFile,Targets):- 
-% 	(Type == '-m'; Type == '-l'),
-% 	!,
-% 	load_config_file(Type,"module",ConfigFile).
+%       (Type == '-m'; Type == '-l'),
+%       !,
+%       load_config_file(Type,"module",ConfigFile).
 
 %parse_other_args_and_load([Type,ConfigFile|Targets],Type,ConfigFile,Targets):-
-%% 	Type = '-u',
-%% 	!,
-%% 	load_config_file(Type,"user file",ConfigFile).
+%%      Type = '-u',
+%%      !,
+%%      load_config_file(Type,"user file",ConfigFile).
 % parse_other_args_and_load(Targets,Type,ConfigFile,Targets) :- 
-% 	\+ member('-h', Targets),
-% %%	\+ member('-u', Targets),
-% 	\+ member('-m', Targets),
-% 	\+ member('-l', Targets),
-% 	!,
-% 	Type = '-m',
-% 	ConfigFile = 'Makefile.pl',
-% 	load_config_file(Type,"(default) module",ConfigFile).
+%       \+ member('-h', Targets),
+% %%    \+ member('-u', Targets),
+%       \+ member('-m', Targets),
+%       \+ member('-l', Targets),
+%       !,
+%       Type = '-m',
+%       ConfigFile = 'Makefile.pl',
+%       load_config_file(Type,"(default) module",ConfigFile).
 
 %% Needed to access predicates generated in user Makefile.pl files
 %% Unfortunately, messes up using modules, so we settle for just modules
@@ -279,49 +279,49 @@ load_config_files([M|Ms], Message) :-
 
 % was:
 % load_config_file(Type,Text,ConfigFile) :-
-% 	trace_message("loading ~s ~w",[Text,ConfigFile]),
-% 	(   Type == '-m' ->
-% 	    ConfigModule = ConfigFile
-% 	;
-% 	    Type == '-l' ->
-% 	    ConfigModule = library(ConfigFile)
-% 	;
-% 	    throw(make_error("'user' configuration files not supported",[]))
-% 	),
-% 	use_module(ConfigModule),
-% 	(call_unknown(_:register_config_file(ConfigModule)) -> true ; true),
-% 	 dyn_load_cfg_module_into_make(ConfigModule).
+%       trace_message("loading ~s ~w",[Text,ConfigFile]),
+%       (   Type == '-m' ->
+%           ConfigModule = ConfigFile
+%       ;
+%           Type == '-l' ->
+%           ConfigModule = library(ConfigFile)
+%       ;
+%           throw(make_error("'user' configuration files not supported",[]))
+%       ),
+%       use_module(ConfigModule),
+%       (call_unknown(_:register_config_file(ConfigModule)) -> true ; true),
+%        dyn_load_cfg_module_into_make(ConfigModule).
 
 load_config_file(Text, ConfigFile) :-
-	trace_message("loading ~s ~w", [Text, ConfigFile]),
-	use_module(ConfigFile),
-	% TODO: does register_config_file/1 exists anywhere?
-	( call_unknown(_:register_config_file(ConfigFile)) -> true ; true ),
-	dyn_load_cfg_module_into_make(ConfigFile).
+    trace_message("loading ~s ~w", [Text, ConfigFile]),
+    use_module(ConfigFile),
+    % TODO: does register_config_file/1 exists anywhere?
+    ( call_unknown(_:register_config_file(ConfigFile)) -> true ; true ),
+    dyn_load_cfg_module_into_make(ConfigFile).
 
 %% ensure_loaded(ConfigFile),
 %% dyn_load_cfg_file_into_make(ConfigFile)
-% 	(   file_exists(ConfigFile) ->
-% 	    ;
-% 	    throw(make_error("file ~w does not exist",[ConfigFile]))
-% 	).
+%       (   file_exists(ConfigFile) ->
+%           ;
+%           throw(make_error("file ~w does not exist",[ConfigFile]))
+%       ).
 
 %% If no target process default if defined
 process_targets([]) :-
-	get_active_config(AC),
-	m_target_exists(AC, default),
-	!,
-	make(default).
+    get_active_config(AC),
+    m_target_exists(AC, default),
+    !,
+    make(default).
 %% else process first target
 process_targets([]) :-
-	get_active_config(AC),
-	m_target_exists(AC, Target),
-	!,
-	make(Target).
+    get_active_config(AC),
+    m_target_exists(AC, Target),
+    !,
+    make(Target).
 %% If targets specified, process them
 process_targets(Targets) :-
-	make(Targets),
-	!.
+    make(Targets),
+    !.
 
 %% -u not used any more
 %%
@@ -342,7 +342,7 @@ usage_message("
 Supported command line options:
 
 lpmake [--trace-deps] [-d Name1=Value1] ... [-d Namen=Valuen] \\\\
-	<command1> ... <commandn>
+    <command1> ... <commandn>
 
   Process commands <command1> ... <commandn>, using file 'Makefile.pl'
   or directory 'installer' in the current directory as configuration
@@ -358,8 +358,8 @@ lpmake [--trace-deps] [-d Name1=Value1] ... [-d Namen=Valuen] \\\\
   library(make/make_rt).
 
 lpmake [--trace-deps] [-d Name1=Value1] ... [-d Namen=Valuen] \\\\
-	[[-m|-l] <.../Configfile1.pl>] [[-m|-l] <.../Configfilen.pl>] \\\\
-        <command1> ... <commandn>
+    [[-m|-l] <.../Configfile1.pl>] [[-m|-l] <.../Configfilen.pl>] \\\\
+    <command1> ... <commandn>
 
   Same as above, but using files <.../Configfilex.pl> as configuration
   file. One or more configuration files can be used. When using more
@@ -380,36 +380,36 @@ lpmake --help [ [-m|-l] <.../Configfile.pl> ]
 ").
 
 report_usage(ApplName) :-
-	format(user_error, "~nUsage:~n~n       ~w <option(s)> <command(s)>~n",
-	    [ApplName]),
-	usage_message(Text),
-	format(user_error, Text, []).
+    format(user_error, "~nUsage:~n~n       ~w <option(s)> <command(s)>~n",
+        [ApplName]),
+    usage_message(Text),
+    format(user_error, Text, []).
 
 report_commands(LoadedFile) :-
-	format(user_error, "~nSupported commands:~n", []),
-	report_commands_aux(LoadedFile).
+    format(user_error, "~nSupported commands:~n", []),
+    report_commands_aux(LoadedFile).
 
 report_commands_aux('') :-
-	!,
-	format(user_error, "~n(no configuration file loaded)~n", []).
+    !,
+    format(user_error, "~n(no configuration file loaded)~n", []).
 report_commands_aux(LoadedFile) :-
-	format(user_error, "[From module: ~w]~n~n", [LoadedFile]),
-	( findall(Target, m_target_exists(_, Target), Targets),
-	  Targets = [_|_] ->
-	    ( % (failure-driven loop)
-	      member(Target, Targets),
-	        format(user_error, "    ~w:~n    ", [Target]),
-	        ( call_unknown(_:target_comment(Target)) ->
-		    true
-	        ; m_target_comment(_, Target, Comment, Args) ->
-		    format(user_error, Comment, Args)
-	        ; format(user_error, "(no information available)~n", [])
-	        ),
-	        format(user_error, "~n~n", []),
-	      fail
-	    ; true
-	    )
-	; format(user_error,
-		"(no documented commands in the configuration file)~n",
-		[])
-	).
+    format(user_error, "[From module: ~w]~n~n", [LoadedFile]),
+    ( findall(Target, m_target_exists(_, Target), Targets),
+      Targets = [_|_] ->
+        ( % (failure-driven loop)
+          member(Target, Targets),
+            format(user_error, "    ~w:~n    ", [Target]),
+            ( call_unknown(_:target_comment(Target)) ->
+                true
+            ; m_target_comment(_, Target, Comment, Args) ->
+                format(user_error, Comment, Args)
+            ; format(user_error, "(no information available)~n", [])
+            ),
+            format(user_error, "~n~n", []),
+          fail
+        ; true
+        )
+    ; format(user_error,
+            "(no documented commands in the configuration file)~n",
+            [])
+    ).
