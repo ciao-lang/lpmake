@@ -149,9 +149,8 @@ Copyright @copyright{} 1997-2002 The Clip Group.
    @section{lpmake usage}
 
 @comment{This already talks about the autodocumentation...}
-@begin{verbatim}
+
 @includefact{usage_message/1}
-@end{verbatim}
 
 ").
 
