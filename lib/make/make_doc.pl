@@ -264,17 +264,13 @@ The following is a simple example of a Makefile showing some basic
 functionality (this is @tt{MakefileExample.pl} in the
 @tt{examples/simple} directory):
 
-@begin{verbatim}
-@includeverbatim{examples/simple/MakefileExample.pl}
-@end{verbatim}
+@includecode{examples/simple/MakefileExample.pl}
 
 The following are a few commands that can be used on the previous file 
 (see file @tt{CommandsToTry} in the @tt{examples/simple}
 directory in the @lib{make} library):
 
-@begin{verbatim}
-@includeverbatim{examples/simple/CommandsToTry}
-@end{verbatim}
+@includecode{examples/simple/CommandsToTry}
 
 See also the LaTeX example in the @tt{examples/latex} directory.
 
